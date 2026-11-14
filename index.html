@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Universe 🥺✨</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hue: 260;
+      --rgb-glow: hsl(var(--hue), 90%, 65%);
+      --rgb-glow-2: hsl(calc(var(--hue) + 60), 90%, 65%);
+      --rgb-glow-3: hsl(calc(var(--hue) + 140), 90%, 65%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: 'Quicksand', sans-serif;
+      color: #fff;
+      background: #04030c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Smooth RGB Color-Changing Cosmic Background */
+    .rgb-universe {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 25%, hsla(var(--hue), 85%, 32%, 0.55), transparent 50%),
+        radial-gradient(circle at 80% 75%, hsla(calc(var(--hue) + 80), 85%, 30%, 0.5), transparent 52%),
+        radial-gradient(circle at 50% 50%, hsla(calc(var(--hue) + 160), 80%, 20%, 0.45), #03020a 75%);
+      animation: rgbCycle 18s linear infinite;
+      transition: filter 1s ease;
+    }
+
+    /* Swirling Dark Matter & Nebula Clouds */
+    .dark-matter {
+      position: fixed;
+      inset: -25%;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 35% 40%, rgba(5, 2, 14, 0.88) 0%, transparent 55%),
+        radial-gradient(ellipse at 65% 60%, rgba(4, 2, 12, 0.92) 0%, transparent 50%),
+        conic-gradient(from 0deg at 50% 50%,
+          rgba(8, 4, 20, 0.65),
+          transparent 25%,
+          rgba(6, 2, 16, 0.78) 50%,
+          transparent 75%,
+          rgba(8, 4, 20, 0.65));
+      filter: blur(36px);
+      animation: swirlMatter 45s linear infinite;
+      mix-blend-mode: multiply;
+    }
+
+    .nebula-mist {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 30% 70%, hsla(calc(var(--hue) + 40), 95%, 55%, 0.16), transparent 45%),
+        radial-gradient(circle at 75% 25%, hsla(calc(var(--hue) + 130), 95%, 60%, 0.16), transparent 45%);
+      filter: blur(55px);
+      animation: driftMist 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes rgbCycle {
+      0%   { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    @keyframes swirlMatter {
+      0%   { transform: rotate(0deg) scale(1.05); }
+      50%  { transform: rotate(180deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1.05); }
+    }
+
+    @keyframes driftMist {
+      0%   { transform: translate(-3%, -2%) scale(1); }
+      100% { transform: translate(3%, 3%) scale(1.1); }
+    }
+
+    /* Starfield & Interactive Particle Canvas */
+    #galaxyCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Intro Cosmic Seal */
+    .intro-seal {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+    }
+
+    .intro-seal.hidden {
+      opacity: 0;
+      transform: scale(1.4);
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .seal-orb {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.35), rgba(255, 110, 199, 0.25) 55%, rgba(20, 10, 45, 0.85));
+      box-shadow:
+        0 0 35px rgba(255, 120, 210, 0.55),
+        0 0 80px rgba(110, 180, 255, 0.35),
+        inset 0 0 25px rgba(255, 255, 255, 0.35);
+      animation: floatSlow 3.4s ease-in-out infinite;
+    }
+
+    .seal-orb::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #ff7eb3, #7afcff, #feff9c, #b388ff, #ff7eb3);
+      z-index: -1;
+      filter: blur(10px);
+      opacity: 0.75;
+      animation: spinBorder 5s linear infinite;
+    }
+
+    .seal-orb span {
+      font-size: 3rem;
+      filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8));
+      animation: pulseHeart 1.6s ease-in-out infinite;
+    }
+
+    .seal-text {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.6px;
+      color: #f8e8ff;
+      text-shadow: 0 0 14px rgba(255, 140, 220, 0.75);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Main Sorry Card */
+    .card-wrapper {
+      position: relative;
+      z-index: 10;
+      width: min(92vw, 450px);
+      opacity: 0;
+      transform: translateY(35px) scale(0.92);
+      pointer-events: none;
+      transition: all 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card-wrapper.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* Smooth Animated RGB Glow Border */
+    .card-glow {
+      position: relative;
+      padding: 2.5px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ff75c3, #ffa647, #ffe83f, #9fff5b, #70e2ff, #cd93ff, #ff75c3);
+      background-size: 300% 300%;
+      animation: rgbBorder 8s ease infinite, floatSlow 6s ease-in-out infinite;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.75),
+        0 0 40px rgba(255, 117, 195, 0.25),
+        0 0 70px rgba(112, 226, 255, 0.2);
+    }
+
+    @keyframes rgbBorder {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes spinBorder {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-9px); }
+    }
+
+    @keyframes pulseHeart {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(1.16); }
+    }
+
+    .card {
+      background: rgba(12, 8, 28, 0.78);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 28px;
+      padding: 30px 26px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle starry sheen inside card */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.14), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Cute Mascot SVG Container */
+    .mascot-box {
+      width: 120px;
+      height: 110px;
+      margin: 0 auto 8px;
+      position: relative;
+      animation: floatSlow 3.8s ease-in-out infinite;
+    }
+
+    .mascot-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      filter: drop-shadow(0 0 18px rgba(255, 145, 225, 0.45));
+    }
+
+    .sad-eyes, .happy-eyes {
+      transition: opacity 0.4s ease;
+    }
+
+    .happy-eyes {
+      opacity: 0;
+    }
+
+    .card.forgiven .sad-eyes {
+      opacity: 0;
+    }
+
+    .card.forgiven .happy-eyes {
+      opacity: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #ffd6f6;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ffb8e6, #ffe9a8, #a6f6ff, #e0b8ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbBorder 5s linear infinite;
+    }
+
+    .message {
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: #e9e2f8;
+      margin-bottom: 18px;
+    }
+
+    .message strong {
+      color: #ffbee9;
+      font-weight: 700;
+    }
+
+    .promise-box {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+      font-size: 0.88rem;
+      color: #d6ccff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      min-height: 52px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 999px;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, opacity 0.3s ease;
+    }
+
+    .btn-forgive {
+      background: linear-gradient(135deg, #ff75c3, #a87ffb, #6fe7ff);
+      background-size: 200% 200%;
+      animation: rgbBorder 4s ease infinite;
+      color: #130926;
+      font-weight: 600;
+      box-shadow: 0 6px 24px rgba(255, 117, 195, 0.45);
+    }
+
+    .btn-forgive:hover {
+      transform: translateY(-2px) scale(1.06);
+      box-shadow: 0 10px 30px rgba(255, 117, 195, 0.65);
+    }
+
+    .btn-forgive:active {
+      transform: scale(0.96);
+    }
+
+    .btn-mad {
+      background: rgba(255, 255, 255, 0.1);
+      color: #e6dcff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-mad:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .plea-note {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #ffb8df;
+      min-height: 20px;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Celebration state after forgiveness */
+    .forgiven-panel {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .card.forgiven .default-panel {
+      display: none;
+    }
+
+    .card.forgiven .forgiven-panel {
+      display: flex;
+    }
+
+    @keyframes popIn {
+      0%   { opacity: 0; transform: scale(0.82); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .love-meter {
+      font-size: 0.9rem;
+      color: #a9f5ff;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-kiss {
+      background: rgba(255, 130, 205, 0.2);
+      color: #ffd9f2;
+      border: 1px solid rgba(255, 150, 220, 0.45);
+      padding: 10px 20px;
+      font-size: 0.95rem;
+    }
+
+    .btn-kiss:hover {
+      transform: scale(1.06);
+      background: rgba(255, 130, 205, 0.32);
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px 18px 22px;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+      .message {
+        font-size: 0.93rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Smooth RGB Galaxy & Dark Matter Layers -->
+  <div class="rgb-universe"></div>
+  <div class="dark-matter"></div>
+  <div class="nebula-mist"></div>
+  <canvas id="galaxyCanvas"></canvas>
+
+  <!-- Tap-to-Open Cosmic Seal -->
+  <div class="intro-seal" id="introSeal">
+    <div class="seal-orb">
+      <span>🪐</span>
+    </div>
+    <div class="seal-text">Tap to open a little universe for you ✨</div>
+  </div>
+
+  <!-- Main Apology Card -->
+  <div class="card-wrapper" id="cardWrapper">
+    <div class="card-glow">
+      <div class="card" id="sorryCard">
+        <!-- Cute Animated Chibi Planet -->
+        <div class="mascot-box">
+          <svg class="mascot-svg" viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="planetGrad" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffd1f3" />
+                <stop offset="55%" stop-color="#c38bff" />
+                <stop offset="100%" stop-color="#6b4ee6" />
+              </radialGradient>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ff8cd9" stop-opacity="0.2" />
+                <stop offset="50%" stop-color="#8cf4ff" stop-opacity="0.95" />
+                <stop offset="100%" stop-color="#ff8cd9" stop-opacity="0.2" />
+              </linearGradient>
+            </defs>
+
+            <!-- Back Ring -->
+            <ellipse cx="70" cy="64" rx="58" ry="16" fill="none" stroke="url(#ringGrad)" stroke-width="5" transform="rotate(-14 70 64)" opacity="0.65" />
+
+            <!-- Planet Body -->
+            <circle cx="70" cy="60" r="36" fill="url(#planetGrad)" />
+
+            <!-- Little Star Freckles -->
+            <circle cx="48" cy="40" r="2.2" fill="#fff" opacity="0.7" />
+            <circle cx="94" cy="46" r="1.8" fill="#fff" opacity="0.6" />
+
+            <!-- Rosy Cheeks -->
+            <ellipse cx="50" cy="66" rx="6" ry="3.5" fill="#ff7bb8" opacity="0.65" />
+            <ellipse cx="90" cy="66" rx="6" ry="3.5" fill="#ff7bb8" opacity="0.65" />
+
+            <!-- Sad Puppy Eyes (Default) -->
+            <g class="sad-eyes">
+              <circle cx="57" cy="57" r="5" fill="#231242" />
+              <circle cx="55.5" cy="55" r="2" fill="#fff" />
+              <circle cx="58.5" cy="58.5" r="1" fill="#fff" />
+              <circle cx="83" cy="57" r="5" fill="#231242" />
+              <circle cx="81.5" cy="55" r="2" fill="#fff" />
+              <circle cx="84.5" cy="58.5" r="1" fill="#fff" />
+              <!-- Sad little brows -->
+              <path d="M51 50 Q57 47 61 50" stroke="#231242" stroke-width="2" fill="none" stroke-linecap="round" />
+              <path d="M79 50 Q83 47 89 50" stroke="#231242" stroke-width="2" fill="none" stroke-linecap="round" />
+              <!-- Tiny wobbly mouth -->
+              <path d="M65 69 Q70 65 75 69" stroke="#231242" stroke-width="2.2" fill="none" stroke-linecap="round" />
+            </g>
+
+            <!-- Happy Eyes (When Forgiven) -->
+            <g class="happy-eyes">
+              <path d="M52 57 Q57 50 62 57" stroke="#231242" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path d="M78 57 Q83 50 88 57" stroke="#231242" stroke-width="3" fill="none" stroke-linecap="round" />
+              <path d="M64 66 Q70 74 76 66" stroke="#231242" stroke-width="2.5" fill="#ff7bb8" stroke-linecap="round" />
+            </g>
+
+            <!-- Front Ring -->
+            <path d="M14 73 Q70 92 126 55" fill="none" stroke="url(#ringGrad)" stroke-width="5.5" stroke-linecap="round" />
+
+            <!-- Floating Little Heart -->
+            <path d="M104 28 C104 24, 110 24, 110 28 C110 24, 116 24, 116 28 C116 33, 110 37, 110 37 C110 37, 104 33, 104 28 Z" fill="#ff85c8" />
+          </svg>
+        </div>
+
+        <div class="default-panel">
+          <span class="badge">✨ Cosmic Apology ✨</span>
+          <!-- Customize your baby's name here -->
+          <h1>I'm So Sorry, Baby 🥺</h1>
+
+          <!-- Customize your message here -->
+          <p class="message">
+            Even in a galaxy full of billions of stars and swirling dark matter,
+            <strong>you are my brightest light</strong>. I hate seeing you upset,
+            especially when I'm the reason. Please forgive your silly little star?
+          </p>
+
+          <div class="promise-box">
+            <span>🌙</span>
+            <span>Promise: unlimited cuddles, kisses & zero attitude!</span>
+          </div>
+
+          <div class="buttons">
+            <button class="btn-forgive" id="forgiveBtn">I Forgive You 💖</button>
+            <button class="btn-mad" id="madBtn">Still mad 😤</button>
+          </div>
+          <div class="plea-note" id="pleaNote"></div>
+        </div>
+
+        <div class="forgiven-panel">
+          <span class="badge">🌌 Universe Restored 🌌</span>
+          <h1>Yay!! Thank You, Baby! 🥰</h1>
+          <p class="message">
+            You just turned all the dark matter in my sky into pure stardust!
+            I love you to the edge of the universe and right back again. 💫
+          </p>
+          <div class="love-meter" id="kissCounter">Cosmic Kisses Sent: 1 💋</div>
+          <button class="btn-kiss" id="kissBtn">Send Another Kiss ✨💖</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. GALAXY CANVAS: STARS, SHOOTING STARS, & STARDUST
+    // ==========================================
+    const canvas = document.getElementById('galaxyCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    const stars = [];
+    const shootingStars = [];
+    const particles = [];
+    const mouse = { x: -999, y: -999, vx: 0, vy: 0 };
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initStars();
+    }
+
+    function initStars() {
+      stars.length = 0;
+      const count = Math.floor((width * height) / 4800);
+      const starColors = ['#ffffff', '#ffd6f6', '#c2f0ff', '#ffe9b8', '#d7b8ff'];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.8 + 0.4,
+          alpha: Math.random(),
+          twinkleSpeed: Math.random() * 0.025 + 0.008,
+          color: starColors[Math.floor(Math.random() * starColors.length)],
+          depth: Math.random() * 0.5 + 0.2
+        });
+      }
+    }
+
+    function spawnShootingStar() {
+      shootingStars.push({
+        x: Math.random() * width * 0.8,
+        y: Math.random() * height * 0.4,
+        len: Math.random() * 90 + 60,
+        speed: Math.random() * 9 + 8,
+        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.25,
+        alpha: 1
+      });
+    }
+
+    function spawnParticles(x, y, count = 4, burst = false) {
+      const hues = [320, 280, 195, 50, 345];
+      for (let i = 0; i < count; i++) {
+        const angle = burst ? Math.random() * Math.PI * 2 : Math.random() * Math.PI * 2;
+        const speed = burst ? Math.random() * 6 + 1.5 : Math.random() * 1.6 + 0.3;
+        const hue = hues[Math.floor(Math.random() * hues.length)];
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - (burst ? 1.5 : 0),
+          size: burst ? Math.random() * 6 + 3 : Math.random() * 2.8 + 1,
+          alpha: 1,
+          decay: burst ? Math.random() * 0.015 + 0.012 : 0.025,
+          color: `hsl(${hue}, 100%, 76%)`,
+          isHeart: burst && Math.random() > 0.45
+        });
+      }
+    }
+
+    function drawHeart(x, y, size, color, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = color;
+      ctx.translate(x, y);
+      ctx.beginPath();
+      const s = size * 0.55;
+      ctx.moveTo(0, s);
+      ctx.bezierCurveTo(-s * 1.6, -s * 0.4, -s * 0.8, -s * 1.8, 0, -s * 0.6);
+      ctx.bezierCurveTo(s * 0.8, -s * 1.8, s * 1.6, -s * 0.4, 0, s);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      frame++;
+
+      // Twinkling stars with gentle parallax
+      const offsetX = mouse.x > 0 ? (mouse.x - width / 2) * 0.015 : 0;
+      const offsetY = mouse.y > 0 ? (mouse.y - height / 2) * 0.015 : 0;
+
+      for (const s of stars) {
+        s.alpha += s.twinkleSpeed;
+        if (s.alpha > 1 || s.alpha < 0.15) s.twinkleSpeed *= -1;
+        const px = (s.x - offsetX * s.depth + width) % width;
+        const py = (s.y - offsetY * s.depth + height) % height;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.1, Math.min(1, s.alpha));
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(px, py, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        if (s.r > 1.5) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = s.color;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      // Occasional shooting star
+      if (frame % 170 === 0 && Math.random() > 0.25) {
+        spawnShootingStar();
+      }
+
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const st = shootingStars[i];
+        const dx = Math.cos(st.angle) * st.speed;
+        const dy = Math.sin(st.angle) * st.speed;
+        st.x += dx;
+        st.y += dy;
+        st.alpha -= 0.018;
+
+        const tailX = st.x - Math.cos(st.angle) * st.len;
+        const tailY = st.y - Math.sin(st.angle) * st.len;
+
+        const grad = ctx.createLinearGradient(st.x, st.y, tailX, tailY);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${st.alpha})`);
+        grad.addColorStop(1, 'rgba(180, 220, 255, 0)');
+
+        ctx.save();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2.2;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(st.x, st.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+        ctx.restore();
+
+        if (st.alpha <= 0) shootingStars.splice(i, 1);
+      }
+
+      // Stardust & heart burst particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+
+        if (p.isHeart) {
+          drawHeart(p.x, p.y, p.size * 1.4, p.color, Math.max(0, p.alpha));
+        } else {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        if (p.alpha <= 0) particles.splice(i, 1);
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
+
+    // Cursor / Touch Stardust Trail
+    function handleMove(x, y) {
+      mouse.x = x;
+      mouse.y = y;
+      spawnParticles(x, y, 2, false);
+    }
+
+    window.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches[0]) handleMove(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+
+    // ==========================================
+    // 2. CARD INTERACTIONS
+    // ==========================================
+    const introSeal = document.getElementById('introSeal');
+    const cardWrapper = document.getElementById('cardWrapper');
+    const sorryCard = document.getElementById('sorryCard');
+    const forgiveBtn = document.getElementById('forgiveBtn');
+    const madBtn = document.getElementById('madBtn');
+    const pleaNote = document.getElementById('pleaNote');
+    const kissBtn = document.getElementById('kissBtn');
+    const kissCounter = document.getElementById('kissCounter');
+
+    // Open cosmic seal
+    introSeal.addEventListener('click', () => {
+      const rect = introSeal.getBoundingClientRect();
+      spawnParticles(rect.left + rect.width / 2, rect.top + rect.height / 2, 42, true);
+      introSeal.classList.add('hidden');
+      setTimeout(() => {
+        cardWrapper.classList.add('visible');
+      }, 220);
+    });
+
+    // Cute pleas if "Still mad" is clicked
+    const pleas = [
+      "Wait really? Look at my little puppy planet eyes 🥺",
+      "What if I bring your favorite snacks & warm hugs? 🍫🫂",
+      "Even the dark matter misses your cute smile ✨",
+      "Okay last try... pretty please forgive your baby? 💖"
+    ];
+    let madClicks = 0;
+
+    madBtn.addEventListener('click', () => {
+      if (madClicks < pleas.length) {
+        pleaNote.textContent = pleas[madClicks];
+        madClicks++;
+
+        // Gently shrink "Still mad" & grow "Forgive"
+        const shrink = Math.max(0.7, 1 - madClicks * 0.08);
+        const grow = 1 + madClicks * 0.08;
+        madBtn.style.transform = `scale(${shrink})`;
+        forgiveBtn.style.transform = `scale(${grow})`;
+      } else {
+        madBtn.textContent = "Fine, okay 🥺💖";
+        madBtn.addEventListener('click', triggerForgiveness, { once: true });
+      }
+    });
+
+    function triggerForgiveness() {
+      sorryCard.classList.add('forgiven');
+      // Supernova burst of hearts & RGB stars
+      for (let i = 0; i < 4; i++) {
+        setTimeout(() => {
+          spawnParticles(
+            width * (0.25 + Math.random() * 0.5),
+            height * (0.25 + Math.random() * 0.45),
+            38,
+            true
+          );
+        }, i * 180);
+      }
+    }
+
+    forgiveBtn.addEventListener('click', triggerForgiveness);
+
+    // Extra kisses button
+    let kisses = 1;
+    kissBtn.addEventListener('click', (e) => {
+      kisses++;
+      kissCounter.textContent = `Cosmic Kisses Sent: ${kisses} 💋`;
+      const rect = kissBtn.getBoundingClientRect();
+      spawnParticles(rect.left + rect.width / 2, rect.top, 26, true);
+    });
+  </script>
+</body>
+</html>
